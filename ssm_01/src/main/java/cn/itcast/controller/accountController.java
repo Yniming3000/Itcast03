@@ -22,10 +22,7 @@ public class accountController {
 <<<<<<< HEAD
 	//桌面第二次修改
 =======
-
->>>>>>> d57331eabba8052c04115f8763f49077efa50adf
-	@Autowired
-     private accountService service;
+//zhuomianbanxiugai
 	
 	 @RequestMapping("/demo01.do")
 	public String test01() throws SysException {
