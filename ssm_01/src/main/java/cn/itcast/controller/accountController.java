@@ -15,7 +15,7 @@ import cn.itcast.service.accountService;
 @Controller
 @RequestMapping("/pages")
 public class accountController {
-	//eclipse第一次修改
+	//eclipse第一次修改，，
 	@Autowired
      private accountService service;
 	
