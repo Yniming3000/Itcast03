@@ -15,8 +15,15 @@ import cn.itcast.service.accountService;
 @Controller
 @RequestMapping("/pages")
 public class accountController {
+
+	//eclipse第一次修改，，
+
 	//桌面版本修改   
+<<<<<<< HEAD
 	//桌面第二次修改
+=======
+
+>>>>>>> d57331eabba8052c04115f8763f49077efa50adf
 	@Autowired
      private accountService service;
 	
