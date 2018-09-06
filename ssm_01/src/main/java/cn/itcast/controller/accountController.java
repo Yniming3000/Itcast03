@@ -15,7 +15,7 @@ import cn.itcast.service.accountService;
 @Controller
 @RequestMapping("/pages")
 public class accountController {
-	
+	//桌面版本修改   
 	@Autowired
      private accountService service;
 	
