@@ -16,30 +16,9 @@ import cn.itcast.service.accountService;
 @RequestMapping("/pages")
 public class accountController {
 
-	//eclipse第一次修改，，
-
-	//桌面版本修改   
-<<<<<<< HEAD
-    
-	//eclipse第二次修改。。
-=======
-<<<<<<< HEAD
-	//桌面第二次修改
-=======
-<<<<<<< .mine
-//zhuomianbanxiugai
-
-
-
-
-=======
-
->>>>>>> d57331eabba8052c04115f8763f49077efa50adf
->>>>>>> branch 'master' of git@github.com:Yniming3000/Itcast03.git
+	//eclipse第一次修改
 	@Autowired
-     private accountService service;
->>>>>>> .theirs
-	
+ private accountService service;
 	 @RequestMapping("/demo01.do")
 	public String test01() throws SysException {
 		 
