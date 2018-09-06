@@ -1,4 +1,4 @@
-package cn.itcast.controller;
+﻿package cn.itcast.controller;
 
 
 
@@ -16,6 +16,7 @@ import cn.itcast.service.accountService;
 @RequestMapping("/pages")
 public class accountController {
 	//桌面版本修改   
+	//桌面第二次修改
 	@Autowired
      private accountService service;
 	
