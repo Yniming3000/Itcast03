@@ -20,9 +20,25 @@ public class accountController {
 
 	//桌面版本修改   
 <<<<<<< HEAD
+    
+	//eclipse第二次修改。。
+=======
+<<<<<<< HEAD
 	//桌面第二次修改
 =======
+<<<<<<< .mine
 //zhuomianbanxiugai
+
+
+
+
+=======
+
+>>>>>>> d57331eabba8052c04115f8763f49077efa50adf
+>>>>>>> branch 'master' of git@github.com:Yniming3000/Itcast03.git
+	@Autowired
+     private accountService service;
+>>>>>>> .theirs
 	
 	 @RequestMapping("/demo01.do")
 	public String test01() throws SysException {
