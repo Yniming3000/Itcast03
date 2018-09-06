@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 开启注解扫描，要扫描的是service spring有自己的配置文件，SpringMVC也有自己的配置文件，
+	里面都有自己的容器，spring的容器是SpringMVC容器的父容器，和继承差不多，所以，开启扫描的时候，
+	自己扫自己的
+	-->
+	<context:component-scan base-package="cn.itcast.service" />
+	<!-- Spring 整合mybatis ，目的，把dao的代理对象加入ioc容器中，并注入到service-->
+	<!--配置连接池对象， c3p0连接池-->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	   <property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql:///ssm" />
+		<property name="user" value="root" />
+		<property name="password" value="root" />
+	</bean>
+	
+	<!-- 配置工厂对象，代理对象是sqlsession获取的,sqlsession是工厂获取的 
+	在单独使用mybatis时，需要解析他的主配置文件，文件中有datasource对象，
+	InputStream stream = Resources.getResourceAsStream("SqlMapConfig.xml");
+	SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(stream);
+	-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	   <property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- 配置dao包扫描，将工厂注入，有了工厂，有了dao包接口，底层就可以获取sqlsession对象 创建代理对象-->
+	<bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	    <property name="basePackage" value="cn.itcast.dao"/>
+	    <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<!-- 事务管理 -->
+	<!-- 配置平台事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" >
+	  <property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- 配置事务通知，提交和回滚事务-->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+	   <tx:attributes>
+	   <!-- 配置业务层方法具体设置-->
+	      <tx:method name="find*" read-only="true"/>
+	   </tx:attributes>
+	</tx:advice>
+	<!-- 配置aop增强-->
+	<aop:config>
+	  <aop:advisor advice-ref="txAdvice" pointcut="execution( * cn.itcast.service.*.*ServiceImpl.*(..))"/>
+	</aop:config>
+	
+	
+	
+</beans>
